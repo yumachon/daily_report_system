@@ -40,11 +40,11 @@
         </table>
 
         <p>
-            <a href="<c:url value'?action=${actEmp}&command=${commEdit}&id=${employee.id}' />">この従業員情報を編集する</a>
+            <a href="<c:url value='?action=${actEmp}&command=${commEdit}&id=${employee.id}' />">この従業員情報を編集する</a>
         </p>
 
         <p>
             <a href="<c:url value='?action=${actEmp}&command=${commIdx}' />">一覧に戻る</a>
         </p>
     </c:param>
-</c:import>s
+</c:import>
