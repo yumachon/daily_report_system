@@ -162,17 +162,27 @@ public class EmployeeAction extends ActionBase {
 
             String pepper = getContextScope(PropertyConst.PEPPER);
 
-            LIST<String> errors = service.update(ev,  pepper);
+            List<String> errors = service.update(ev,  pepper);
 
             if(errors.size() > 0) {
                 putRequestScope(AttributeConst.TOKEN, getTokenId());
                 putRequestScope(AttributeConst.EMPLOYEE, ev);
                 putRequestScope(AttributeConst.ERR, errors);
 
-                forward(ForwardConst.FM_EMP_EDIT);
+                forward(ForwardConst.FW_EMP_EDIT);
             }else
 
                 putSessionScope(AttributeConst.FLUSH, MessageConst.I_UPDATED.getMessage());
+
+            redirect(ForwardConst.ACT_EMP, ForwardConst.CMD_INDEX);
+        }
+    }
+
+    public void destroy() throws ServletException, IOException{
+        if(checkToken()) {
+            service.destroy(toNumber(getRequestParam(AttributeConst.EMP_ID)));
+
+            putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
 
             redirect(ForwardConst.ACT_EMP, ForwardConst.CMD_INDEX);
         }
