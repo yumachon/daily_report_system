@@ -67,11 +67,13 @@ public class EmployeeAction extends ActionBase {
 
     public void entryNew() throws ServletException, IOException {
 
-        putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
-        putRequestScope(AttributeConst.EMPLOYEE, new EmployeeView()); //空の従業員インスタンス
+        if(checkAdmin()) {
+            putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+            putRequestScope(AttributeConst.EMPLOYEE, new EmployeeView()); //空の従業員インスタンス
 
 
-        forward(ForwardConst.FW_EMP_NEW);
+            forward(ForwardConst.FW_EMP_NEW);
+        }
     }
 
     public void create() throws ServletException, IOException {
@@ -186,6 +188,18 @@ public class EmployeeAction extends ActionBase {
             putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());
 
             redirect(ForwardConst.ACT_EMP, ForwardConst.CMD_INDEX);
+        }
+    }
+
+    private boolean checkAdmin() throws ServletException, IOException {
+
+        EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
+
+        if(ev.getAdminFlag() != AttributeConst.ROLE_ADMIN.getIntegerValue()) {
+             forward(ForwardConst.FW_ERR_UNKNOWN);
+             return false;
+        }else {
+            return true;
         }
     }
 }
