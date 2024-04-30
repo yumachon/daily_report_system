@@ -179,10 +179,8 @@ public class EmployeeAction extends ActionBase {
     }
 
     public void destroy() throws ServletException, IOException{
-        System.out.println("おはよう");
 
         if(checkToken()) {
-            System.out.println("こんにちは");
             service.destroy(toNumber(getRequestParam(AttributeConst.EMP_ID)));
 
             putSessionScope(AttributeConst.FLUSH, MessageConst.I_DELETED.getMessage());

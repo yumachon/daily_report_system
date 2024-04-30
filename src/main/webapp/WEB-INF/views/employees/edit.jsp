@@ -23,8 +23,8 @@
 
         <form method="POST"
             action="<c:url value='?action=${action}&command=${commDel}' />">
-            <iput type="hidden" name="${AttributeConst.EMP_ID.getValue()}" value="${employee.id}"/>
-            <iput type="hidden" name="${AttributeConst.TOKEN.getValue()}"value="${_token}"/>
+            <input type="hidden" name="${AttributeConst.EMP_ID.getValue()}" value="${employee.id}"/>
+            <input type="hidden" name="${AttributeConst.TOKEN.getValue()}"value="${_token}"/>
         </form>
 
         <script>
