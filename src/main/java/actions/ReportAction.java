@@ -12,6 +12,7 @@ import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
+import models.Employee;
 import services.ReportService;
 
 public class ReportAction extends ActionBase {
@@ -129,6 +130,25 @@ public class ReportAction extends ActionBase {
              putRequestScope(AttributeConst.REPORT, rv); //取得した日報データ
 
              forward(ForwardConst.FW_REP_SHOW); //詳細画面を表示
+        }
+    }
+
+    //編集画面を表示する
+    public void edit() throws ServletException, IOException{
+         //idを条件に日報データを取得する
+        ReportView rv =  service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+
+        //セッションからログイン中の従業員情報を取得
+        Employee ev = (Employeeview) getSessionScope(AttributeConst.LOGIN_EMP);
+
+        if(rv == null || ev.getId() != rv.getEmployee().getId()) {
+
+            forward(ForwardConst.FW_ERR_UNKNOWN);
+        }else {
+            putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+            putRequestScope(AttributeConst.REPORT, rv); //取得した日報データ
+
+            forward(ForwardConst.FW_REP_EDIT); //編集画面を表示
         }
     }
 }
