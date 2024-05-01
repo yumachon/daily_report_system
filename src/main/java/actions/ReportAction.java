@@ -12,7 +12,6 @@ import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
-import models.Employee;
 import services.ReportService;
 
 public class ReportAction extends ActionBase {
@@ -139,7 +138,7 @@ public class ReportAction extends ActionBase {
         ReportView rv =  service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
 
         //セッションからログイン中の従業員情報を取得
-        Employee ev = (Employeeview) getSessionScope(AttributeConst.LOGIN_EMP);
+        EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
         if(rv == null || ev.getId() != rv.getEmployee().getId()) {
 
