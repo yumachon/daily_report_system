@@ -40,8 +40,9 @@ p{
     margin-bottom: 15px;
 }
 a{
-    text-decoration: note;
+    text-decoration: none;
     color: #24738e;
+
 }
 
 table, tr, th, td{
@@ -122,6 +123,7 @@ select {
 }
 
 #header a {
+    text-decoration: none;
     color: #eeeeee;
 }
 
