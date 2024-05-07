@@ -27,14 +27,14 @@
                 <tr>
                     <th>権限</th>
                     <td><c:choose>
-                        <c:when test="${employee.adminFlag == AttribuConst.ROLE_ADMIN.getIntegerValue()}">管理者</c:when>
+                        <c:when test="${employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue()}">管理者</c:when>
                         <c:otherwise>一般</c:otherwise>
                     </c:choose></td>
             </tr>
             <tr>
                 <th>登録日時</th>
-                <fmt:parseDate value="${employee.updatedAt}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="createDay" type="date"/>
-                <td><fmt:formatDate value="${updateDay}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                <fmt:parseDate value="${employee.createdAt}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="createDay" type="date"/>
+                <td><fmt:formatDate value="${createDay}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             </tr>
             <tr>
                 <th>更新日時</th>

@@ -73,6 +73,13 @@ public class AuthAction extends ActionBase{
             }
 
     }
+    public void logout() throws ServletException, IOException{
+        removeSessionScope(AttributeConst.LOGIN_EMP);
+
+        putSessionScope(AttributeConst.FLUSH, MessageConst.I_LOGOUT.getMessage());
+
+        redirect(ForwardConst.ACT_AUTH, ForwardConst.CMD_SHOW_LOGIN);
+    }
 
     public void showLogin() throws ServletException, IOException{
 
@@ -87,12 +94,5 @@ public class AuthAction extends ActionBase{
         forward(ForwardConst.FW_LOGIN);
     }
 
-    public void logout() throws ServletException, IOException{
-        removeSessionScope(AttributeConst.LOGIN_EMP);
-
-        putSessionScope(AttributeConst.FLUSH, MessageConst.I_LOGOUT.getMessage());
-
-        redirect(ForwardConst.ACT_AUTH, ForwardConst.CMD_SHOW_LOGIN);
-    }
 
 }
